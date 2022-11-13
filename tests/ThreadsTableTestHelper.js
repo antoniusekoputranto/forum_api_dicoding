@@ -9,7 +9,7 @@ const ThreadsTableTestHelper = {
         body = 'This is thread body', date = ''
     }) {
         const query = {
-            text: 'INSERT INTO threads VALUES ($1, $2, $3, $4, $5)',
+            text: 'INSERT INTO threads VALUES ($1, $2, $3, $4, $5) returning id',
             values: [id, owner, title, body, date],
         }
 
@@ -23,7 +23,7 @@ const ThreadsTableTestHelper = {
         }
 
         const result = await pool.query(query)
-        if(result.rows.lenth === 0){
+        if(!result.rowCount){
             throw new NotFoundError('thread tidak ditemukan')
         }
 

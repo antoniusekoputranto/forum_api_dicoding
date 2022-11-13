@@ -31,7 +31,7 @@ class CommentRepositoryPostgres extends CommentRepository {
         }
 
         const result = await this._pool.query(query)
-        if(result.rows.length === 0) {
+        if(!result.rowCount) {
             throw new NotFoundError('komentar tidak ditemukan')
         }
     }
@@ -43,7 +43,7 @@ class CommentRepositoryPostgres extends CommentRepository {
         }
 
         const result = await this._pool.query(query)
-        if(result.rows.length === 0){
+        if(!result.rowCount){
             throw new AuthorizationError('Unauthorized')
         }
     }
