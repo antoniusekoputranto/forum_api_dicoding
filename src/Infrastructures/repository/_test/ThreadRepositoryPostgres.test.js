@@ -129,14 +129,17 @@ describe('ThreadRepositoryPostgres', () => {
             const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, {})
 
             // Action
-            const { id, title, body, date, username } = await threadRepositoryPostgres.getDetailThread('thread-123')
+            const threadDetail = await threadRepositoryPostgres.getDetailThread('thread-123')
 
             // Assert
-            expect(id).toEqual('thread-123')
-            expect(title).toEqual('Thread Title')
-            expect(body).toEqual('Thread Body')
-            expect(date).toEqual(testDate)
-            expect(username).toEqual('dicoding')
+            expect(threadDetail).toStrictEqual({
+                id: 'thread-123',
+                title: 'Thread Title',
+                body: 'Thread Body',
+                date: testDate,
+                username: 'dicoding',
+            });
+
         })
     })
 })

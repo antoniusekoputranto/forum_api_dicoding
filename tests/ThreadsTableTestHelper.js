@@ -23,7 +23,7 @@ const ThreadsTableTestHelper = {
         }
 
         const result = await pool.query(query)
-        if(result.rows.lenth === 0){
+        if(!result.rowCount){
             throw new NotFoundError('thread tidak ditemukan')
         }
 
