@@ -92,7 +92,7 @@ describe('ThreadRepositoryPostgres', () => {
                 password: 'dicoding123'
             })
 
-            const threadId = await ThreadsTableTestHelper.addThreads({
+            await ThreadsTableTestHelper.addThreads({
                 id: 'thread-123',
                 title: 'Thread Title',
                 body: 'Thread Body',
@@ -102,7 +102,7 @@ describe('ThreadRepositoryPostgres', () => {
             const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, {})
 
             // Action and Assert
-            await expect(threadRepositoryPostgres.verifyThreadAvaibility(threadId))
+            await expect(threadRepositoryPostgres.verifyThreadAvaibility('thread-123'))
                 .resolves.not.toThrow(NotFoundError)
         })
     })
@@ -118,7 +118,7 @@ describe('ThreadRepositoryPostgres', () => {
             })
 
             const testDate = new Date().toISOString();
-            const threadId = await ThreadsTableTestHelper.addThreads({
+            await ThreadsTableTestHelper.addThreads({
                 id: 'thread-123',
                 title: 'Thread Title',
                 body: 'Thread Body',
@@ -129,7 +129,7 @@ describe('ThreadRepositoryPostgres', () => {
             const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, {})
 
             // Action
-            const threadDetail = await threadRepositoryPostgres.getDetailThread(threadId)
+            const threadDetail = await threadRepositoryPostgres.getDetailThread('thread-123')
 
             // Assert
             expect(threadDetail).toStrictEqual({
